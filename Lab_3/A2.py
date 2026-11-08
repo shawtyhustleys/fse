@@ -1,15 +1,25 @@
 import string
-password = input()  
-allowed = string.ascii_uppercase + string.ascii_lowercase + string.digits + '*-#'
-#print(allowed)        
-#print(password.lower())
-if len(password) != 8:
+password = input("Введите пароль:") 
+allowedsymb = '*&@#$%^!~-'
+allowed = string.ascii_uppercase + string.ascii_lowercase + string.digits + allowedsymb
+isValid = True
+if not len(password) == 8:
     print("Длина пароля не равна 8")
+    isValid = False
 if not any(symbol.isdigit() for symbol in password):
     print("В пароле отсутствуют цифры") 
-if not any(symb.isdigit() in '*&@#$%^!~-#' for symb in password):
+    isValid = False
+if not any(x in allowedsymb for x in password):
     print("В пароле отсутствуют спец символы")
-if not any(symbol.isupper() for symbol in password):
+    isValid = False
+if not any(x.isupper() for x in password):
     print("В пароле отсутствуют заглавные буквы")
-if not any():
-    print("В пароле отсутствую")
+    isValid = False
+if not any(x.islower() for x in password):
+    print("В пароле отсутствуют строчные буквы")
+    isValid = False
+if any(x not in allowed for x in password):
+    print("В пароле недопустимые символы")
+    isValid = False
+if isValid:
+    print("Надежный пароль")
